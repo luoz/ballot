@@ -1,0 +1,4 @@
+*.pyc
+*000*
+.idea/
+db.sqlite3
