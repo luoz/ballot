@@ -1,8 +1,11 @@
 <!-- polls/templates/polls/detail.html -->
-
+{% if error_message  %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <h1>{{ question.question_text }}</h1>
-<ul>
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
 {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }}</li>
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <lable for="choice{{ forloop.connter }}">{{ choice.choice_text }}</lable><br/>
 {% endfor %}
-</ul>
+<input type="submit" value="vote" />
+</form>
